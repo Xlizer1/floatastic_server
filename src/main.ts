@@ -10,18 +10,24 @@ const server = new Setup({
 
 const apisPath = path.resolve(__dirname, "./apis");
 
-const routes = fs
-    .readdirSync(apisPath)
-    .map((dir) => {
-        const routerPath = path.join(apisPath, dir, "router.ts");
-        if (fs.existsSync(routerPath)) {
-            const router = require(routerPath).default;
-            return { path: `/${dir}`, router };
-        }
-        return null;
-    })
-    .filter((route) => route !== null);
+(async () => {
+    const routes = await Promise.all(
+        fs.readdirSync(apisPath).map(async (dir) => {
+            const routerPath = path.join(apisPath, dir, "router.ts");
+            if (fs.existsSync(routerPath)) {
+                const router = (await import(routerPath)).default; // Use await import()
+                return { path: `/${dir}`, router };
+            }
+            return null;
+        })
+    );
 
-server.registerRoutes(routes as { path: string; router: any }[]);
+    // Filter out null routes
+    const validRoutes = routes.filter((route) => route !== null);
 
-server.initiateHttpServer();
+    // Register routes
+    server.registerRoutes(validRoutes as { path: string; router: any }[]);
+
+    // Start the server
+    server.initiateHttpServer();
+})();

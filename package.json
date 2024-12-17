@@ -6,8 +6,8 @@
   "devDependencies": {
     "@types/bun": "latest",
     "@types/express": "^5.0.0",
-		"@types/figlet": "^1.5.8",
-		"@types/gradient-string": "^1.1.6"
+    "@types/figlet": "^1.5.8",
+    "@types/gradient-string": "^1.1.6"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -24,6 +24,7 @@
     "figlet": "^1.8.0",
     "gradient-string": "^3.0.0",
     "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.1",
     "mysql2": "^3.11.5",
     "puppeteer": "^23.10.4",
     "redis": "^4.7.0",
