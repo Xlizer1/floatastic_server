@@ -1,36 +1,58 @@
-import axios from "axios";
-import { formatCurrency } from "../helpers/common";
+import axios, { type AxiosResponse } from "axios";
+
+interface DmarketResponse {
+    objects: {
+        extra: {
+            name: string;
+            exterior?: string;
+            floatValue?: number;
+            quality?: string;
+            stickers?: any[];
+            inspectInGame?: string;
+            paintIndex?: number;
+            paintSeed?: number;
+            itemType?: string;
+            linkId?: string;
+        };
+        price: {
+            USD: number;
+        };
+    }[];
+    cursor?: string;
+}
 
 export async function fetchSkinportData() {
     const response = await axios.get("https://api.skinport.com/v1/items");
     return response.data;
 }
 
-export async function fetchDmarketData() {
+export async function fetchDmarketData(name: string): Promise<any[] | undefined> {
     try {
-        const response = await axios.get(
-            "https://api.dmarket.com/exchange/v1/market/items",
-            {
-                params: { currency: "USD", limit: 100, gameId: "a8db" },
-            }
-        );
-        return response.data.objects.map((skin: any) => ({
-            name: skin?.extra?.name,
-            price: formatCurrency(skin?.price?.USD),
-            exterior: skin?.extra?.exterior || "none",
-            float: skin?.extra?.floatValue || 0,
-            quality: skin?.extra?.quality || "none",
-            stickers: skin?.extra?.stickers?.length ? skin?.extra?.stickers : [],
-            inspectInGame: skin?.extra?.inspectInGame || "none",
-            paintIndex: skin?.extra?.paintIndex || 0,
-            paintSeed: skin?.extra?.paintSeed || 0,
-            itemType: skin?.extra?.itemType || "none",
-            marketLink: skin?.extra?.linkId ? "https://dmarket.com/ingame-items/item-list/csgo-skins?userOfferId=" + skin?.extra?.linkId : "none",
-            currency: "USD",
-            updatedAt: Date.now(),
-            market: "dmarket",
-        }));
+        let allItems: any[] = [];
+        let cursor: string | null = null;
+
+        do {
+            const response: AxiosResponse<DmarketResponse> = await axios.get(
+                "https://api.dmarket.com/exchange/v1/market/items",
+                {
+                    params: {
+                        currency: "USD",
+                        limit: 100,
+                        gameId: "a8db",
+                        orderBy: "personal",
+                        cursor: cursor,
+                        title: name
+                    },
+                }
+            );
+
+            allItems = allItems.concat(response.data.objects);
+
+            cursor = response.data.cursor || null;
+        } while (cursor);
+
+        return allItems;
     } catch (error) {
-        console.log(error);
+        console.error("Error fetching DMarket data:", error);
     }
 }

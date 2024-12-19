@@ -1,41 +1,41 @@
-import { cacheSkinData, getCachedSkinData } from "./redisService";
-import { saveSkinData, getStoredSkins } from "./mongoService";
+import { cacheSkinData, getCachedSkinData } from "./database services/redisService";
+import { saveSkinData, getStoredSkins } from "./database services/mongoService";
+import { AllCombainedMarketsSkins } from "./combainedData";
 
 const CACHE_TTL = 600; // 10 minutes
 
 export class SkinService {
     /**
      * Centralized function to get skins
-     * @param marketName - Name of the market (e.g., "skinport", "dmarket")
-     * @param fetchFunction - Function to fetch data from the market API
+     * @param skin_name - Name of the market (e.g., "skinport", "dmarket")
      * @returns Cached or fetched skins
      */
-    static async getSkins(marketName: string, fetchFunction: () => Promise<any>) {
-        const cacheKey = `skins:${marketName}`;
+    static async getSkins(skin_name: string) {
+        const cacheKey = `skins:${skin_name}`;
 
         // Step 1: Check Redis cache
         const cachedData = await getCachedSkinData(cacheKey);
         if (cachedData) {
-            console.log(`[Cache] Returning ${marketName} data from cache.`);
+            console.log(`[Cache] Returning ${skin_name} data from cache.`);
             return cachedData;
         }
 
-        console.log(`[Fetch] Fetching ${marketName} data from API...`);
-        const fetchedData = await fetchFunction();
+        console.log(`[Fetch] Fetching ${skin_name} data from API...`);
+        const combainedSkinsData = await AllCombainedMarketsSkins.dataCombained(skin_name);
 
-        if (fetchedData) {
+        if (combainedSkinsData) {
             // Step 2: Cache the data in Redis
-            await cacheSkinData(cacheKey, fetchedData, CACHE_TTL);
+            await cacheSkinData(cacheKey, combainedSkinsData, CACHE_TTL);
 
             // Step 3: Save to MongoDB
-            await saveSkinData(marketName, fetchedData);
+            await saveSkinData(skin_name, combainedSkinsData);
 
-            return fetchedData;
+            return combainedSkinsData;
         }
 
         // Step 4: Retrieve stored data from MongoDB if API fails
-        console.log(`[Fallback] Retrieving ${marketName} data from MongoDB...`);
-        const storedData = await getStoredSkins(marketName);
+        console.log(`[Fallback] Retrieving ${skin_name} data from MongoDB...`);
+        const storedData = await getStoredSkins(skin_name);
 
         return storedData;
     }

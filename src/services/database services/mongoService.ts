@@ -1,4 +1,4 @@
-import { Skin } from "../models/skin";
+import { Skin } from "../../models/skin";
 
 export async function saveSkinData(market: string, skinData: any[]) {
     try {

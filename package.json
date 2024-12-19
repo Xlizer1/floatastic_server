@@ -1,5 +1,5 @@
 {
-  "name": "floatastic_server",
+  "name": "floatic_server",
   "module": "src/main.ts",
   "type": "module",
   "version": "1.0.0",

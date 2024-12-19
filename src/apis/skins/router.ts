@@ -1,10 +1,8 @@
 import express from "express";
-import { getSkinportSkins, getDmarketData } from "./controller";
+import { getMarketsData } from "./controller";
 
 const router = express.Router();
 
-router.get("/dmarket", getDmarketData);
-
-router.get("/skinport", getSkinportSkins);
+router.get("/", getMarketsData);
 
 export default router;
