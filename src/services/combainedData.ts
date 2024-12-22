@@ -9,7 +9,7 @@ export class AllCombainedMarketsSkins {
      */
     static async dataCombained(name: string) {
         const dmarketData = await this.getDmarketData(name);
-        return [];
+        return [ ...dmarketData ];
     }
     private static async getDmarketData(name: string) {
         const data = await fetchDmarketData(name);

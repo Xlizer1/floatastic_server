@@ -3,6 +3,7 @@ import express, { type Request, type Response } from "express";
 import gradient from "gradient-string";
 import figlet from "figlet";
 import { version } from "../../package.json";
+import "./db";
 
 const app = express();
 

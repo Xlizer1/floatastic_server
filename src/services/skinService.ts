@@ -14,21 +14,21 @@ export class SkinService {
         const cacheKey = `skins:${skin_name}`;
 
         // Step 1: Check Redis cache
-        const cachedData = await getCachedSkinData(cacheKey);
-        if (cachedData) {
-            console.log(`[Cache] Returning ${skin_name} data from cache.`);
-            return cachedData;
-        }
+        // const cachedData = await getCachedSkinData(cacheKey);
+        // if (cachedData) {
+        //     console.log(`[Cache] Returning ${skin_name} data from cache.`);
+        //     return cachedData;
+        // }
 
         console.log(`[Fetch] Fetching ${skin_name} data from API...`);
         const combainedSkinsData = await AllCombainedMarketsSkins.dataCombained(skin_name);
 
         if (combainedSkinsData) {
             // Step 2: Cache the data in Redis
-            await cacheSkinData(cacheKey, combainedSkinsData, CACHE_TTL);
+            // await cacheSkinData(cacheKey, combainedSkinsData, CACHE_TTL);
 
             // Step 3: Save to MongoDB
-            await saveSkinData(skin_name, combainedSkinsData);
+            // await saveSkinData(skin_name, combainedSkinsData);
 
             return combainedSkinsData;
         }

@@ -28,10 +28,12 @@ export async function fetchSkinportData() {
 
 export async function fetchDmarketData(name: string): Promise<any[] | undefined> {
     try {
+        console.log("fetchDmarketData");
         let allItems: any[] = [];
         let cursor: string | null = null;
 
-        do {
+        // do {
+        console.log(name)
             const response: AxiosResponse<DmarketResponse> = await axios.get(
                 "https://api.dmarket.com/exchange/v1/market/items",
                 {
@@ -48,8 +50,9 @@ export async function fetchDmarketData(name: string): Promise<any[] | undefined>
 
             allItems = allItems.concat(response.data.objects);
 
-            cursor = response.data.cursor || null;
-        } while (cursor);
+        //     cursor = response.data.cursor || null;
+        //     console.log("got a batch", cursor)
+        // } while (cursor);
 
         return allItems;
     } catch (error) {
