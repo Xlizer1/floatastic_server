@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 19, 2024 at 04:41 PM
--- Server version: 8.2.0
--- PHP Version: 8.2.13
+-- Generation Time: Dec 22, 2024 at 04:52 AM
+-- Server version: 8.3.0
+-- PHP Version: 8.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,69 @@ CREATE TABLE IF NOT EXISTS `def_indexes` (
   `def_index` int NOT NULL,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `def_indexes`
+--
+
+INSERT INTO `def_indexes` (`id`, `def_index`, `name`) VALUES
+(1, 519, 'Ursus Knife'),
+(2, 7, 'AK-47'),
+(3, 514, 'Bowie Knife'),
+(4, 9, 'AWP'),
+(5, 5030, 'Sport Gloves'),
+(6, 507, 'Karambit'),
+(7, 515, 'Butterfly Knife'),
+(8, 16, 'M4A4'),
+(9, 506, 'Gut Knife'),
+(10, 500, 'Bayonet'),
+(11, 508, 'M9 Bayonet'),
+(12, 5034, 'Specialist Gloves'),
+(13, 4, 'Glock-18'),
+(14, 520, 'Navaja Knife'),
+(15, 526, 'Kukri Knife'),
+(16, 5031, 'Driver Gloves'),
+(17, 503, 'Classic Knife'),
+(18, 505, 'Flip Knife'),
+(19, 509, 'Huntsman Knife'),
+(20, 518, 'Survival Knife'),
+(21, 522, 'Stiletto Knife'),
+(22, 523, 'Talon Knife'),
+(23, 60, 'M4A1-S'),
+(24, 27, 'MAG-7'),
+(25, 5035, 'Hydra Gloves'),
+(26, 5033, 'Moto Gloves'),
+(27, 521, 'Nomad Knife'),
+(28, 17, 'MAC-10'),
+(29, 8, 'AUG'),
+(30, 1, 'Desert Eagle'),
+(31, 63, 'CZ75-Auto'),
+(32, 61, 'USP-S'),
+(33, 3, 'Five-SeveN'),
+(34, 13, 'Galil AR'),
+(35, 25, 'XM1014'),
+(36, 516, 'Shadow Daggers'),
+(37, 525, 'Skeleton Knife'),
+(38, 512, 'Falchion Knife'),
+(39, 39, 'SG 553'),
+(40, 30, 'Tec-9'),
+(41, 10, 'FAMAS'),
+(42, 19, 'P90'),
+(43, 24, 'UMP-45'),
+(44, 34, 'MP9'),
+(45, 36, 'P250'),
+(46, 11, 'G3SG1'),
+(47, 5032, 'Hand Wraps'),
+(48, 40, 'SSG 08'),
+(49, 517, 'Paracord Knife'),
+(50, 26, 'PP-Bizon'),
+(51, 4725, 'Broken Fang Gloves'),
+(52, 33, 'MP7'),
+(53, 38, 'SCAR-20'),
+(54, 23, 'MP5-SD'),
+(55, 35, 'Nova'),
+(56, 32, 'P2000');
 
 -- --------------------------------------------------------
 
@@ -1180,6 +1242,150 @@ INSERT INTO `paint_indexes` (`id`, `paint_index`, `name`) VALUES
 (1109, 10086, 'Yellow-banded'),
 (1110, 10087, 'Needle Point'),
 (1111, 10088, 'Unhinged');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sticker_indexes`
+--
+
+DROP TABLE IF EXISTS `sticker_indexes`;
+CREATE TABLE IF NOT EXISTS `sticker_indexes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sticker_index` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `sticker_indexes`
+--
+
+INSERT INTO `sticker_indexes` (`id`, `sticker_index`, `name`) VALUES
+(1, 62, 'Team LDLC.com (Holo)'),
+(2, 80, 'Vox Eminor (Holo)'),
+(3, 2219, 's1mple (Gold)'),
+(4, 2893, 'balblna (Gold)'),
+(5, 2737, 's1mple (Gold)'),
+(6, 64, 'LGB eSports (Holo)'),
+(7, 2339, 'suNny (Gold)'),
+(8, 61, 'Team LDLC.com'),
+(9, 8124, 'donk (Gold)'),
+(10, 59, 'iBUYPOWER'),
+(11, 2303, 'keev (Gold)'),
+(12, 2818, 'EliGE (Gold)'),
+(13, 2315, 'autimatic (Gold)'),
+(14, 1983, 'RUBINO (Foil)'),
+(15, 2951, 'LoveYY (Gold)'),
+(16, 2731, 'electronic (Gold)'),
+(17, 2333, 'innocent (Gold)'),
+(18, 102, 'King on the Field'),
+(19, 72, 'Ninjas in Pyjamas (Holo)'),
+(20, 103, 'Howling Dawn'),
+(21, 2575, 'mou (Gold)'),
+(22, 65, 'mousesports'),
+(23, 78, 'Virtus.Pro (Holo)'),
+(24, 56, 'Fnatic (Holo)'),
+(25, 118, 'Winged Defuser'),
+(26, 351, 'Vox Eminor (Holo)'),
+(27, 63, 'LGB eSports'),
+(28, 1796, 'Team Liquid (Foil)'),
+(29, 52, 'Team Dignitas'),
+(30, 3274, 'Xyp9x (Gold)'),
+(31, 2336, 'kRYSTAL (Gold)'),
+(32, 3310, 'pashaBiceps (Gold)'),
+(33, 2204, 'fer (Gold)'),
+(34, 1401, 'daps (Foil)'),
+(35, 3292, 'MSL (Gold)'),
+(36, 288, '3DMAX (Foil)'),
+(37, 789, 'NiKo (Foil)'),
+(38, 2797, 'keshandr (Gold)'),
+(39, 2650, 'TACO (Gold)'),
+(40, 73, 'Reason Gaming'),
+(41, 2312, 'tabseN (Gold)'),
+(42, 2168, 'NEO (Gold)'),
+(43, 51, 'compLexity Gaming (Holo)'),
+(44, 2866, 'RpK (Gold)'),
+(45, 79, 'Vox Eminor'),
+(46, 3253, 'tabseN (Gold)'),
+(47, 3244, 'MAJ3R (Gold)'),
+(48, 2255, 'allu (Gold)'),
+(49, 3289, 'nitr0 (Gold)'),
+(50, 1974, 'cajunb (Foil)'),
+(51, 2240, 'aizy (Gold)'),
+(52, 2192, 'olofmeister (Gold)'),
+(53, 48, '3DMAX'),
+(54, 323, 'Natus Vincere (Holo)'),
+(55, 3307, 'byali (Gold)'),
+(56, 845, 'Hiko'),
+(57, 211, 'Ninjas in Pyjamas (Holo)'),
+(58, 143, 'iBUYPOWER (Holo)'),
+(59, 2566, 'Dosia (Gold)'),
+(60, 145, 'London Conspiracy (Holo)'),
+(61, 319, 'LGB eSports (Holo)'),
+(62, 2150, 'device (Gold)'),
+(63, 2183, 'flusha (Gold)'),
+(64, 2572, 'Hobbit (Gold)'),
+(65, 1875, 'electronic (Foil)'),
+(66, 352, 'Vox Eminor (Foil)'),
+(67, 3202, 'mir (Gold)'),
+(68, 2159, 'Kjaerbye (Gold)'),
+(69, 1572, 'ScreaM (Foil)'),
+(70, 3282, 'Twistzz (Foil)'),
+(71, 287, '3DMAX (Holo)'),
+(72, 311, 'HellRaisers (Holo)'),
+(73, 343, 'Titan (Holo)'),
+(74, 2937, 'Flash Gaming (Foil)'),
+(75, 2755, 'suNny (Gold)'),
+(76, 1854, 'apEX (Foil)'),
+(77, 1911, 'karrigan (Foil)'),
+(78, 822, 'aizy (Foil)'),
+(79, 779, 'denis'),
+(80, 2913, 'captainMo (Foil)'),
+(81, 57, 'HellRaisers'),
+(82, 1845, 'NAF (Foil)'),
+(83, 1524, 'f0rest (Foil)'),
+(84, 315, 'Keyd Stars (Holo)'),
+(85, 1323, 'OpTic Gaming (Foil)'),
+(86, 1740, 'Astralis (Foil)'),
+(87, 1869, 'B1ad3 (Foil)'),
+(88, 1425, 'kennyS (Foil)'),
+(89, 764, 'coldzera'),
+(90, 729, 'WorldEdit (Foil)'),
+(91, 3830, 'jks (Gold)'),
+(92, 2617, 'Snax (Gold)'),
+(93, 2189, 'KRIMZ (Gold)'),
+(94, 1557, 's1mple (Foil)'),
+(95, 3154, 'oskar (Gold)'),
+(96, 1115, 'kennyS (Foil)'),
+(97, 1017, 'Counter Logic Gaming (Foil)'),
+(98, 858, 'ScreaM (Foil)'),
+(99, 2583, 'HEN1 (Foil)'),
+(100, 2165, 'byali (Gold)'),
+(101, 2366, 'kNgV- (Gold)'),
+(102, 1169, 'coldzera (Foil)'),
+(103, 3325, 'f0rest (Gold)'),
+(104, 2918, 'somebody'),
+(105, 131, 'Team Dignitas (Holo)'),
+(106, 927, 'Team Liquid (Foil)'),
+(107, 1787, 'OpTic Gaming (Holo)'),
+(108, 3833, 'AZR (Gold)'),
+(109, 1082, 'hazed (Foil)'),
+(110, 2052, 'NEO (Foil)'),
+(111, 3748, 'DickStacy (Foil)'),
+(112, 944, 'Titan'),
+(113, 486, 'chrisJ (Foil)'),
+(114, 324, 'Natus Vincere (Foil)'),
+(115, 1776, 'mousesports (Foil)'),
+(116, 55, 'Fnatic'),
+(117, 7918, 'Side Eyes (Lenticular)'),
+(118, 914, 'Team Dignitas'),
+(119, 1920, 'fer (Foil)'),
+(120, 3605, 'Jame (Gold)'),
+(121, 77, 'Virtus.Pro'),
+(122, 2577, 'BIT (Foil)'),
+(123, 295, 'Counter Logic Gaming (Holo)'),
+(124, 1584, 'device (Foil)');
 
 --
 -- Constraints for dumped tables
