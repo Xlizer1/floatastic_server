@@ -39,7 +39,7 @@ export class AllCombainedMarketsSkins {
         }
     }
     private async getSkinPortData(name: string) {
-        const data = await fetchDmarketData(name);
+        const data = await fetchSkinportData(name);
         if (data && data?.length) {
             return data.map((skin) => ({
                 name: skin.extra.name,
@@ -65,21 +65,4 @@ export class AllCombainedMarketsSkins {
             return [];
         }
     }
-}
-
-interface DmarketItem {
-    name: string;
-    price: string;
-    exterior: string;
-    float: number;
-    quality: string;
-    stickers: any[];
-    inspectInGame: string;
-    paintIndex: number;
-    paintSeed: number;
-    itemType: string;
-    marketLink: string;
-    currency: string;
-    updatedAt: number;
-    market: string;
 }

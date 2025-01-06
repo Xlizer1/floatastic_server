@@ -21,7 +21,7 @@ interface DmarketResponse {
     cursor?: string;
 }
 
-export async function fetchSkinportData() {
+export async function fetchSkinportData(name: string): Promise<any[] | undefined> {
     const response = await axios.get("https://api.skinport.com/v1/items");
     return response.data;
 }
