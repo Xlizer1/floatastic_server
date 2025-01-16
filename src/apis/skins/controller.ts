@@ -16,23 +16,34 @@ export async function getMarketsData(req: Request, res: Response) {
 
 export async function getTopSkins(req: Request, res: Response) {
     const { name } = req.query;
+
     try {
-        var skin_name = name ? JSON.stringify(name) : "";
+        let sql = `
+            SELECT DISTINCT
+                *
+            FROM 
+                skins f
+        `;
+
+        if (name) {
+            const tokens = (name as string)
+                .split(/\s+/)
+                .filter(Boolean)
+                .map((token) => token.replace(/'/g, "''")); // Escape single quotes to prevent injection
+            const likeClauses = tokens
+                .map((token) => `f.name LIKE '%${token}%'`)
+                .join(" AND ");
+                console.log(likeClauses)
+            sql += ` WHERE ${likeClauses}`;
+        }
+
+        sql += ` LIMIT 10`;
+
+        executeQuery(sql, "getTopSkins", (result: any) => {
+            res.json(result);
+        });
     } catch (error) {
-        skin_name = "";
-        console.log(error);
+        console.error("Unexpected error:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
-
-    var sql = `
-        SELECT DISTINCT
-            * 
-        FROM 
-            skins f
-    `;
-
-    if (name) sql += ` WHERE f.name LIKE '${skin_name.split('"').join("%")}'`;
-
-    sql += ` LIMIT 10`;
-
-    executeQuery(sql, "name", (result: any) => res.json(result));
 }

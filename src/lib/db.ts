@@ -1,10 +1,10 @@
 import mysql from "mysql2";
 
 // Database configuration
-const host = process.env.DB_HOST || "lizer.tech";  // Remove https://
+const host = process.env.DB_HOST || "localhost";  // Remove https://
 const port = parseInt(process.env.DB_PORT || '3306', 10);
 const user = process.env.DB_USER || "root";
-const password = process.env.PASSWORD || "Mustag252@";
+const password = process.env.PASSWORD || "";
 const database = process.env.DATABASE || "floatastic";
 
 let pool: mysql.Pool | undefined;
