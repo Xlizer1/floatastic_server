@@ -1,4 +1,5 @@
 import axios, { type AxiosResponse } from "axios";
+import type { SearchParameters } from "../interfaces/ISearchParams";
 
 interface DmarketResponse {
     objects: {
@@ -26,14 +27,17 @@ export async function fetchSkinportData(name: string): Promise<any[] | undefined
     return response.data;
 }
 
-export async function fetchDmarketData(name: string): Promise<any[] | undefined> {
+function formatFloatRange(range: [number, number]): string {
+    return `floatValueFrom%5B%5D=${range[0].toFixed(2)},floatValueTo%5B%5D=${range[1].toFixed(2)}`;
+}
+
+export async function fetchDmarketData(searchParams: SearchParameters): Promise<any[] | undefined> {
     try {
         console.log("fetchDmarketData");
         let allItems: any[] = [];
         let cursor: string | null = null;
 
         // do {
-        console.log(name)
             const response: AxiosResponse<DmarketResponse> = await axios.get(
                 "https://api.dmarket.com/exchange/v1/market/items",
                 {
@@ -41,9 +45,11 @@ export async function fetchDmarketData(name: string): Promise<any[] | undefined>
                         currency: "USD",
                         limit: 100,
                         gameId: "a8db",
-                        orderBy: "personal",
+                        orderBy: "price",
+                        orderDir: "asc",
                         cursor: cursor,
-                        title: name
+                        treeFilters: formatFloatRange(searchParams.floatRange),
+                        title: searchParams.name
                     },
                 }
             );

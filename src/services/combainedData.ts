@@ -1,4 +1,5 @@
 import { formatCurrency } from "../helpers/common";
+import type { SearchParameters } from "../interfaces/ISearchParams";
 import { fetchSkinportData, fetchDmarketData } from "./externalApis";
 
 export class AllCombainedMarketsSkins {
@@ -7,12 +8,12 @@ export class AllCombainedMarketsSkins {
      * @param name
      * @returns
      */
-    static async dataCombained(name: string) {
-        const dmarketData = await this.getDmarketData(name);
+    static async dataCombained(searchParams: SearchParameters) {
+        const dmarketData = await this.getDmarketData(searchParams);
         return [ ...dmarketData ];
     }
-    private static async getDmarketData(name: string) {
-        const data = await fetchDmarketData(name);
+    private static async getDmarketData(searchParams: SearchParameters) {
+        const data = await fetchDmarketData(searchParams);
         if (data && data?.length) {
             return data.map((skin) => ({
                 name: skin.extra.name,

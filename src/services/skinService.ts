@@ -1,6 +1,7 @@
 import { cacheSkinData, getCachedSkinData } from "./database services/redisService";
 import { saveSkinData, getStoredSkins } from "./database services/mongoService";
 import { AllCombainedMarketsSkins } from "./combainedData";
+import type { SearchParameters } from "../interfaces/ISearchParams";
 
 const CACHE_TTL = 600; // 10 minutes
 
@@ -10,8 +11,8 @@ export class SkinService {
      * @param skin_name - Name of the market (e.g., "skinport", "dmarket")
      * @returns Cached or fetched skins
      */
-    static async getSkins(skin_name: string) {
-        const cacheKey = `skins:${skin_name}`;
+    static async getSkins(searchParams: SearchParameters) {
+        const cacheKey = `skins:${searchParams.name}`;
 
         // Step 1: Check Redis cache
         // const cachedData = await getCachedSkinData(cacheKey);
@@ -20,8 +21,8 @@ export class SkinService {
         //     return cachedData;
         // }
 
-        console.log(`[Fetch] Fetching ${skin_name} data from API...`);
-        const combainedSkinsData = await AllCombainedMarketsSkins.dataCombained(skin_name);
+        console.log(`[Fetch] Fetching ${searchParams.name} data from API...`);
+        const combainedSkinsData = await AllCombainedMarketsSkins.dataCombained(searchParams);
 
         if (combainedSkinsData) {
             // Step 2: Cache the data in Redis
@@ -34,8 +35,8 @@ export class SkinService {
         }
 
         // Step 4: Retrieve stored data from MongoDB if API fails
-        console.log(`[Fallback] Retrieving ${skin_name} data from MongoDB...`);
-        const storedData = await getStoredSkins(skin_name);
+        console.log(`[Fallback] Retrieving ${searchParams.name} data from MongoDB...`);
+        const storedData = await getStoredSkins('dmarket');
 
         return storedData;
     }
